@@ -1,10 +1,12 @@
 package algorithms.graphtheory;
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Scanner;
 
 public class BFSShortestReach {
 
@@ -44,7 +46,7 @@ public class BFSShortestReach {
             
             for (int nodeIndex=0; nodeIndex < numNodes; nodeIndex++) {
                 if (nodeIndex != start) {
-                    int cost = findPath2(start, nodeIndex, adjList, new ArrayList<Integer>());
+                    int cost = findPath(start, nodeIndex, adjList);
                     System.out.print(/*"cost for " + nodeIndex + "=" + */cost + " ");
                 }
             }
@@ -55,67 +57,44 @@ public class BFSShortestReach {
         scanner.close();
     }
     
-    private static int findPath2(int start, int end, List<Integer>[] adjList, List<Integer> path) {
-        if (start == end) return 0;
+    
+    
+    
+    
+    
+    
+    
+    private static int findPath(int start, int end, List<Integer>[] adjList) {
+        Queue<Integer> queue = new LinkedList<Integer>();
         
-        int minCost = Integer.MAX_VALUE;
+        // The cost map acts also as "visited" information. Contains the cost to reach a node
+        Map<Integer, Integer> cost = new HashMap<Integer, Integer>(); 
         
-        for (Integer connectedInt: adjList[start]) {
-            //System.out.println("start=" + start + ",connectedInt=" + connectedInt);
-            if (connectedInt == end) {
-                path.add(connectedInt);
-                return 6;
-            } else if (!path.contains(connectedInt)) {
-                path.add(connectedInt);
-                int subCost = findPath2(connectedInt, end, adjList, path);
-                
-                if (subCost <= 0) {
-                    continue;
-                }
-                else if (subCost < minCost) {
-                    minCost = 6 + subCost;
-                }
+        queue.add(start);
+        cost.put(start, 0);
+        int runningCost = 0;
+        
+        while (!queue.isEmpty()) {
+            int value = queue.poll();
+            runningCost = cost.get(value);
+            
+            if (value == end) {
+                return runningCost;
             }
-        }
-        
-        if (minCost < Integer.MAX_VALUE) {
-            return minCost;
-        } else {
-            return -1;
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    private static int findPath(int start, int end, int[][] edges) {
-        if (start == end) return 0;
-        int minCost = Integer.MAX_VALUE;
-        
-        for (int edgeIndex=0;edgeIndex < edges.length; edgeIndex++) {
-            if (edges[edgeIndex][0] == start) {
-                if (edges[edgeIndex][1] == end) {
-                    return 6;
-                } else {
-                    int subCost = findPath(edges[edgeIndex][1], end, edges);
-                    if (subCost == -1)
-                        continue;
-                    else if (subCost >= 0 && subCost < minCost) {
-                        minCost = subCost;
+
+            runningCost += 6;
+            
+            if (adjList.length > value && value >= 0 && adjList[value] != null)
+                for (int edge: adjList[value]) {
+                    if (cost.get(edge) == null) {
+                        cost.put(edge, runningCost);
+                        queue.add(edge);
                     }
-                    //else return 6 + subCost;
                 }
-            }
+            
         }
         
-        if (minCost < Integer.MAX_VALUE) {
-            return minCost;
-        } else {
-            return -1;
-        }
+        return -1;
+
     }
 }

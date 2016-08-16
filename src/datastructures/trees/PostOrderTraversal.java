@@ -1,4 +1,4 @@
-package datastructures.arrays;
+package datastructures.trees;
 
 public class PostOrderTraversal {
     /* you only have to complete the function given below.  
