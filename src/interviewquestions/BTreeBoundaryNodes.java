@@ -22,7 +22,7 @@ public class BTreeBoundaryNodes {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        BTNode root = BTreeSerializer.deserializeTree(tree);
+        BTNode root = BTreeSerializer.deserializeTreeBFS(tree);
 
         printBoundaryNodes(root);
 

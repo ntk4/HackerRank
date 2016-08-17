@@ -8,6 +8,11 @@ public class BTNode {
         this.left = left;
         this.right = right;
     }
+    public BTNode(int value) {
+        super();
+        this.value = value;
+    }
+    
     public int value;
     
     public BTNode left;

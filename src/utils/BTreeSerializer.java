@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BTreeSerializer {
-    public static BTNode deserializeTree(Integer[] tree) {
+    public static BTNode deserializeTreeBFS(Integer[] tree) {
 
         Queue<Integer> sourceQueue = new LinkedList<Integer>();
         sourceQueue.addAll(Arrays.asList(tree));
