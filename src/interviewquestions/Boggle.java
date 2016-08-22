@@ -7,8 +7,8 @@ import java.util.Set;
 
 /**
  * See the problem and another solution at: http://www.geeksforgeeks.org/boggle-find-possible-words-board-characters/
- * 
- * @author tsatsni
+ * and: http://exceptional-code.blogspot.be/2012/02/solving-boggle-game-recursion-prefix.html
+ * @author ntk4
  * 
  */
 public class Boggle {
